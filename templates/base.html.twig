@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Votre titre ici{% endblock %}</title>
-    
-    {% block stylesheets %}
-        <!-- Inclure le fichier CSS de Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!-- Inclure vos autres fichiers CSS ici -->
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    {% endblock %}
-</head>
-<body>
-
-{% block body %}
-{% endblock %}
-
-{% block javascripts %}
-    <!-- Inclure le fichier JS de Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclure vos autres fichiers JS ici -->
-    <script src="{{ asset('js/scripts.js') }}"></script>
-{% endblock %}
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>
