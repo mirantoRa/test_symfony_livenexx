@@ -1,35 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SousRubrique index{% endblock %}
+{% block title %}Listes des SousRubriques{% endblock %}
 
 {% block body %}
-    <h1>SousRubrique index</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Rubriques</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sous_rubrique in sous_rubriques %}
-            <tr>
-                <td>{{ sous_rubrique.id }}</td>
-                <td>{{ sous_rubrique.name }}</td>
-                <td>
-                    <a href="{{ path('app_sous_rubrique_show', {'id': sous_rubrique.id}) }}">show</a>
-                    <a href="{{ path('app_sous_rubrique_edit', {'id': sous_rubrique.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_rubrique_index') }}">Rubriques</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_sous_rubrique_index') }}">SousRubriques</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <a href="{{ path('app_sous_rubrique_new') }}">Create new</a>
+    <div class="container">
+        <center><h2>Listes des SousRubriques</h2><center>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Rubrique ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for sous_rubrique in sous_rubriques %}
+                <tr>
+                    <td>{{ sous_rubrique.id }}</td>
+                    <td>{{ sous_rubrique.name }}</td>
+                    <td>{{ sous_rubrique.rubrique.id }}</td>
+                    <td>
+                        <form action="{{ path('app_sous_rubrique_edit', {'id': sous_rubrique.id}) }}" method="GET">
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ path('app_sous_rubrique_delete', {'id': sous_rubrique.id}) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sous_rubrique.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+  
+        <div class="text-left mb-4">
+            <a href="{{ path('app_sous_rubrique_new') }}" class="btn btn-success">Ajouter SousRubrique</a>
+        </div>
+    </div>
 {% endblock %}
