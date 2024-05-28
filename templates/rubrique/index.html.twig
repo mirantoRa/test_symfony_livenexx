@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rubrique index{% endblock %}
+
+{% block body %}
+    <h1>Rubrique index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rubrique in rubriques %}
+                <tr>
+                    <td>{{ rubrique.id }}</td>
+                    <td><a href="{{ path('app_rubrique_show', {'id': rubrique.id}) }}">{{ rubrique.name }}</a></td>
+                    <td>
+                        <a href="{{ path('app_rubrique_edit', {'id': rubrique.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rubrique_new') }}">Create new</a>
+{% endblock %}
